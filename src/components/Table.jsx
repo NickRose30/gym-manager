@@ -63,7 +63,7 @@ const Table = ({ onRowClick, rows = [], columns = [] }) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, i) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={i} onClick={onRowClick}>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={i} onClick={() => onRowClick(row)}>
                       {columns.map((column, j) => {
                         const value = row[column.id];
                         return (

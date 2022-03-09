@@ -3,6 +3,9 @@ import CustomersTable from '../components/CustomersTable';
 import CustomerDrawer from '../components/CustomerDrawer';
 import styled from 'styled-components';
 import { Button, InputGroup } from '@blueprintjs/core';
+import AddCustomerModal from '../components/modals/AddCustomerModal';
+import { useModal } from "react-modal-hook";
+import { Routes, Route } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -34,20 +37,20 @@ const SearchBar = styled(InputGroup)`
 `;
 
 const Customers = () => {
-  const [selectedCustomer, setSelectedCustomer] = React.useState(null);
-  const [drawerIsOpen, setDrawerIsOpen] = React.useState(false);
-
-  const openDrawer = () => setDrawerIsOpen(true);
-  const closeDrawer = () => setDrawerIsOpen(false);
+  const [showAddCustomerModal, hideAddCustomerModal] = useModal(() => (
+    <AddCustomerModal onClose={hideAddCustomerModal} />
+  ), []);
 
   return (
     <Container>
-      <CustomerDrawer isOpen={drawerIsOpen} onClose={closeDrawer} />
+      <Routes>
+        <Route path=":customerId" element={<CustomerDrawer />} />
+      </Routes>
       <Header>
         <SearchBar type="search" placeholder="Search..." leftIcon="search" />
-        <Button text="Add New Customer" onClick={() => { }} intent="primary" icon="new-person" />
+        <Button text="Add New Customer" onClick={showAddCustomerModal} intent="primary" icon="new-person" />
       </Header>
-      <CustomersTable onRowClick={openDrawer} />
+      <CustomersTable />
     </Container>
   );
 };

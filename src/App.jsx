@@ -57,8 +57,8 @@ const App = () => {
             <Navbar />
             <Workspace>
               <Routes>
-                <Route exact path="/" element={<Calendar />} />
-                <Route exact path="/customers" element={<Customers />} />
+                <Route index exact path="/" element={<Calendar />} />
+                <Route exact path="/customers/*" element={<Customers />} />
                 <Route exact path="/invoices" element={<Invoices />} />
                 <Route exact path="/history" element={<History />} />
                 <Route path="*" element={<NotFound />} />
